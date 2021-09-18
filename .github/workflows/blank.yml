@@ -75,36 +75,36 @@ jobs:
         timeout-minutes: 310
         continue-on-error: true
         env:
-              #1
+              #0
               DATE: "${{ steps.config.outputs.date }}"
               MONTH: "${{ steps.config.outputs.month }}"
               YEAR: "${{ steps.config.outputs.year }}"
               USERNAME: "${{ steps.config.outputs.username }}"
+              #1
+              DATE1: "${{ steps.config.outputs.date1 }}"
+              MONTH1: "${{ steps.config.outputs.month1 }}"
+              YEAR1: "${{ steps.config.outputs.year1 }}"
+              USERNAME1: "${{ steps.config.outputs.username1 }}"
               #2
-              DATE: "${{ steps.config.outputs.date1 }}"
-              MONTH: "${{ steps.config.outputs.month1 }}"
-              YEAR: "${{ steps.config.outputs.year1 }}"
-              USERNAME: "${{ steps.config.outputs.username1 }}"
+              DATE2: "${{ steps.config.outputs.date2 }}"
+              MONTH2: "${{ steps.config.outputs.month2 }}"
+              YEAR2: "${{ steps.config.outputs.year2 }}"
+              USERNAME2: "${{ steps.config.outputs.username2 }}"
               #3
-              DATE: "${{ steps.config.outputs.date2 }}"
-              MONTH: "${{ steps.config.outputs.month2 }}"
-              YEAR: "${{ steps.config.outputs.year2 }}"
-              USERNAME: "${{ steps.config.outputs.username2 }}"
+              DATE3: "${{ steps.config.outputs.date3 }}"
+              MONTH3: "${{ steps.config.outputs.month3 }}"
+              YEAR3: "${{ steps.config.outputs.year3 }}"
+              USERNAME3: "${{ steps.config.outputs.username3 }}"
               #4
-              DATE: "${{ steps.config.outputs.date3 }}"
-              MONTH: "${{ steps.config.outputs.month3 }}"
-              YEAR: "${{ steps.config.outputs.year3 }}"
-              USERNAME: "${{ steps.config.outputs.username3 }}"
+              DATE4: "${{ steps.config.outputs.date4 }}"
+              MONTH4: "${{ steps.config.outputs.month4 }}"
+              YEAR4: "${{ steps.config.outputs.year4 }}"
+              USERNAME4: "${{ steps.config.outputs.username4 }}"
               #5
-              DATE: "${{ steps.config.outputs.date4 }}"
-              MONTH: "${{ steps.config.outputs.month4 }}"
-              YEAR: "${{ steps.config.outputs.year4 }}"
-              USERNAME: "${{ steps.config.outputs.username4 }}"
-              #6
-              DATE: "${{ steps.config.outputs.date5 }}"
-              MONTH: "${{ steps.config.outputs.month5 }}"
-              YEAR: "${{ steps.config.outputs.year5 }}"
-              USERNAME: "${{ steps.config.outputs.username5 }}"
+              DATE5: "${{ steps.config.outputs.date5 }}"
+              MONTH5: "${{ steps.config.outputs.month5 }}"
+              YEAR5: "${{ steps.config.outputs.year5 }}"
+              USERNAME5: "${{ steps.config.outputs.username5 }}"
               #
               TG_ID: "${{ steps.config.outputs.tg_id }}"
               TOKEN: "${{ secrets.BOT_TOKEN }}"
