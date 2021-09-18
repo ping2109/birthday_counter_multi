@@ -1,36 +1,167 @@
-# This is a basic workflow to help you get started with Actions
+name: bday counter
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [main]
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Load Configuration
+        uses: falti/dotenv-action@v0.2.5
+        id: config
+        with:
+          path: config.env
+      - name: Set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.5'
+      - name: Install python requirements
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          pip install python-telegram-bot pyrogram tgcrypto
+      - name: Check date
+        run: |
+          function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
+          required "${{ steps.config.outputs.date }}" "DATE secret"
+          required "${{ steps.config.outputs.date1 }}" "DATE1 secret"
+          required "${{ steps.config.outputs.date2 }}" "DATE2 secret"
+          required "${{ steps.config.outputs.date3 }}" "DATE3 secret"
+          required "${{ steps.config.outputs.date4 }}" "DATE4 secret"
+          required "${{ steps.config.outputs.date5 }}" "DATE5 secret"
+      - name: Check month
+        run: |
+          function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
+          required "${{ steps.config.outputs.month }}" "MONTH secret"
+          required "${{ steps.config.outputs.month1 }}" "MONTH1 secret"
+          required "${{ steps.config.outputs.month2 }}" "MONTH2 secret"
+          required "${{ steps.config.outputs.month3 }}" "MONTH3 secret"
+          required "${{ steps.config.outputs.month4 }}" "MONTH4 secret"
+          required "${{ steps.config.outputs.month5 }}" "MONTH5 secret"
+      - name: Check year
+        run: |
+          function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
+          required "${{ steps.config.outputs.year }}" "YEAR config"
+          required "${{ steps.config.outputs.year1 }}" "YEAR1 config"
+          required "${{ steps.config.outputs.year2 }}" "YEAR2 config"
+          required "${{ steps.config.outputs.year3 }}" "YEAR3 config"
+          required "${{ steps.config.outputs.year4 }}" "YEAR4 config"
+          required "${{ steps.config.outputs.year5 }}" "YEAR5 config"
+      - name: Check username
+        run: |
+          function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
+          required "${{ steps.config.outputs.username }}" "USERNAME config"
+          required "${{ steps.config.outputs.username1 }}" "USERNAME1 config"
+          required "${{ steps.config.outputs.username2 }}" "USERNAME2 config"
+          required "${{ steps.config.outputs.username3 }}" "USERNAME3 config"
+          required "${{ steps.config.outputs.username4 }}" "USERNAME4 config"
+          required "${{ steps.config.outputs.username5 }}" "USERNAME5 config"
+      - name: Check envs
+        run: |
+          function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
+          required "${{ steps.config.outputs.tg_id }}" "TG_ID config"
+          required "${{ secrets.bot_token }}" "BOT_TOKEN config"
+      - name: initialization
+        continue-on-error: true
+        run: |
+          git config --global user.name ${{ secrets.gh_name }}
+          git config --global user.email ${{ secrets.gh_mail }}
+          git config --global credential.helper store
+          echo "https://${{ secrets.gh_name }}:${{ secrets.gh_token }}@github.com" > ~/.git-credentials
+      - name: Calculation + Telegram notify
+        timeout-minutes: 310
+        continue-on-error: true
+        env:
+              #1
+              DATE: "${{ steps.config.outputs.date }}"
+              MONTH: "${{ steps.config.outputs.month }}"
+              YEAR: "${{ steps.config.outputs.year }}"
+              USERNAME: "${{ steps.config.outputs.username }}"
+              #2
+              DATE: "${{ steps.config.outputs.date1 }}"
+              MONTH: "${{ steps.config.outputs.month1 }}"
+              YEAR: "${{ steps.config.outputs.year1 }}"
+              USERNAME: "${{ steps.config.outputs.username1 }}"
+              #3
+              DATE: "${{ steps.config.outputs.date2 }}"
+              MONTH: "${{ steps.config.outputs.month2 }}"
+              YEAR: "${{ steps.config.outputs.year2 }}"
+              USERNAME: "${{ steps.config.outputs.username2 }}"
+              #4
+              DATE: "${{ steps.config.outputs.date3 }}"
+              MONTH: "${{ steps.config.outputs.month3 }}"
+              YEAR: "${{ steps.config.outputs.year3 }}"
+              USERNAME: "${{ steps.config.outputs.username3 }}"
+              #5
+              DATE: "${{ steps.config.outputs.date4 }}"
+              MONTH: "${{ steps.config.outputs.month4 }}"
+              YEAR: "${{ steps.config.outputs.year4 }}"
+              USERNAME: "${{ steps.config.outputs.username4 }}"
+              #6
+              DATE: "${{ steps.config.outputs.date5 }}"
+              MONTH: "${{ steps.config.outputs.month5 }}"
+              YEAR: "${{ steps.config.outputs.year5 }}"
+              USERNAME: "${{ steps.config.outputs.username5 }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python sticker.py
+          python 0/basics.py
+          python 1/basics.py
+          python 2/basics.py
+          python 3/basics.py
+          python 4/basics.py
+          python 5/basics.py
+          sleep 1h
+          python sticker.py
+          python 0/basics.py
+          python 1/basics.py
+          python 2/basics.py
+          python 3/basics.py
+          python 4/basics.py
+          python 5/basics.py
+          sleep 1h
+          python sticker.py
+          python 0/basics.py
+          python 1/basics.py
+          python 2/basics.py
+          python 3/basics.py
+          python 4/basics.py
+          python 5/basics.py
+          sleep 1h
+          python sticker.py
+          python 0/basics.py
+          python 1/basics.py
+          python 2/basics.py
+          python 3/basics.py
+          python 4/basics.py
+          python 5/basics.py
+          sleep 1h
+          python sticker.py
+          python 0/basics.py
+          python 1/basics.py
+          python 2/basics.py
+          python 3/basics.py
+          python 4/basics.py
+          python 5/basics.py
+          sleep 1h
+          python sticker.py
+          python 0/basics.py
+          python 1/basics.py
+          python 2/basics.py
+          python 3/basics.py
+          python 4/basics.py
+          python 5/basics.py
+      - name: Loop
+        continue-on-error: true
+        run: |
+              git clone https://github.com/ping2109/birthday_counter_multi reloop
+              cd reloop || exit 1
+              echo $(date -u +%T%P) >> loop.txt
+              git add loop.txt
+              git commit -m "Loop $(date -u +%D-%T%P)"
+              git push -q https://${{ secrets.GH_TOKEN }}@github.com/ping2109/birthday_counter_multi HEAD:main
