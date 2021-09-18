@@ -32,6 +32,7 @@ jobs:
           required "${{ steps.config.outputs.date3 }}" "DATE3 secret"
           required "${{ steps.config.outputs.date4 }}" "DATE4 secret"
           required "${{ steps.config.outputs.date5 }}" "DATE5 secret"
+          required "${{ steps.config.outputs.date6 }}" "DATE6 secret"
       - name: Check month
         run: |
           function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
@@ -41,6 +42,7 @@ jobs:
           required "${{ steps.config.outputs.month3 }}" "MONTH3 secret"
           required "${{ steps.config.outputs.month4 }}" "MONTH4 secret"
           required "${{ steps.config.outputs.month5 }}" "MONTH5 secret"
+          required "${{ steps.config.outputs.month6 }}" "MONTH6 secret"
       - name: Check year
         run: |
           function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
@@ -50,6 +52,7 @@ jobs:
           required "${{ steps.config.outputs.year3 }}" "YEAR3 config"
           required "${{ steps.config.outputs.year4 }}" "YEAR4 config"
           required "${{ steps.config.outputs.year5 }}" "YEAR5 config"
+          required "${{ steps.config.outputs.year6 }}" "YEAR6 config"
       - name: Check username
         run: |
           function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
@@ -59,6 +62,7 @@ jobs:
           required "${{ steps.config.outputs.username3 }}" "USERNAME3 config"
           required "${{ steps.config.outputs.username4 }}" "USERNAME4 config"
           required "${{ steps.config.outputs.username5 }}" "USERNAME5 config"
+          required "${{ steps.config.outputs.username6 }}" "USERNAME6 config"
       - name: Check envs
         run: |
           function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
@@ -74,6 +78,20 @@ jobs:
       - name: Calculation + Telegram notify
         continue-on-error: true
         env:
+              #0
+              DATE: "${{ steps.config.outputs.date }}"
+              MONTH: "${{ steps.config.outputs.month }}"
+              YEAR: "${{ steps.config.outputs.year }}"
+              USERNAME: "${{ steps.config.outputs.username }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python sticker.py
+          python 0/basics.py
+      - name: Calculation + Telegram notify
+        continue-on-error: true
+        env:
               #1
               DATE1: "${{ steps.config.outputs.date1 }}"
               MONTH1: "${{ steps.config.outputs.month1 }}"
@@ -83,7 +101,6 @@ jobs:
               TG_ID: "${{ steps.config.outputs.tg_id }}"
               TOKEN: "${{ secrets.BOT_TOKEN }}"
         run: |
-          python sticker.py
           python 1/basics.py
       - name: Calculation + Telegram notify
         continue-on-error: true
@@ -140,16 +157,16 @@ jobs:
       - name: Calculation + Telegram notify
         continue-on-error: true
         env:
-              #0
-              DATE: "${{ steps.config.outputs.date }}"
-              MONTH: "${{ steps.config.outputs.month }}"
-              YEAR: "${{ steps.config.outputs.year }}"
-              USERNAME: "${{ steps.config.outputs.username }}"
+              #6
+              DATE5: "${{ steps.config.outputs.date6 }}"
+              MONTH5: "${{ steps.config.outputs.month6 }}"
+              YEAR5: "${{ steps.config.outputs.year6 }}"
+              USERNAME5: "${{ steps.config.outputs.username6 }}"
               #
               TG_ID: "${{ steps.config.outputs.tg_id }}"
               TOKEN: "${{ secrets.BOT_TOKEN }}"
         run: |
-          python 0/basics.py
+          python 6/basics.py
           sleep 1h
       - name: Loop
         continue-on-error: true
