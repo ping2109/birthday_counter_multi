@@ -72,7 +72,6 @@ jobs:
           git config --global credential.helper store
           echo "https://${{ secrets.gh_name }}:${{ secrets.gh_token }}@github.com" > ~/.git-credentials
       - name: Calculation + Telegram notify
-        timeout-minutes: 310
         continue-on-error: true
         env:
               #0
@@ -80,26 +79,67 @@ jobs:
               MONTH: "${{ steps.config.outputs.month }}"
               YEAR: "${{ steps.config.outputs.year }}"
               USERNAME: "${{ steps.config.outputs.username }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python sticker.py
+          python 0/basics.py
+      - name: Calculation + Telegram notify
+        continue-on-error: true
+        env:
               #1
               DATE1: "${{ steps.config.outputs.date1 }}"
               MONTH1: "${{ steps.config.outputs.month1 }}"
               YEAR1: "${{ steps.config.outputs.year1 }}"
               USERNAME1: "${{ steps.config.outputs.username1 }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python 1/basics.py
+      - name: Calculation + Telegram notify
+        continue-on-error: true
+        env:
               #2
               DATE2: "${{ steps.config.outputs.date2 }}"
               MONTH2: "${{ steps.config.outputs.month2 }}"
               YEAR2: "${{ steps.config.outputs.year2 }}"
               USERNAME2: "${{ steps.config.outputs.username2 }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python 2/basics.py
+      - name: Calculation + Telegram notify
+        continue-on-error: true
+        env:
               #3
               DATE3: "${{ steps.config.outputs.date3 }}"
               MONTH3: "${{ steps.config.outputs.month3 }}"
               YEAR3: "${{ steps.config.outputs.year3 }}"
               USERNAME3: "${{ steps.config.outputs.username3 }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python 3/basics.py
+      - name: Calculation + Telegram notify
+        continue-on-error: true
+        env:
               #4
               DATE4: "${{ steps.config.outputs.date4 }}"
               MONTH4: "${{ steps.config.outputs.month4 }}"
               YEAR4: "${{ steps.config.outputs.year4 }}"
               USERNAME4: "${{ steps.config.outputs.username4 }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python 4/basics.py
+      - name: Calculation + Telegram notify
+        continue-on-error: true
+        env:
               #5
               DATE5: "${{ steps.config.outputs.date5 }}"
               MONTH5: "${{ steps.config.outputs.month5 }}"
@@ -109,53 +149,8 @@ jobs:
               TG_ID: "${{ steps.config.outputs.tg_id }}"
               TOKEN: "${{ secrets.BOT_TOKEN }}"
         run: |
-          python sticker.py
-          python 0/basics.py
-          python 1/basics.py
-          python 2/basics.py
-          python 3/basics.py
-          python 4/basics.py
           python 5/basics.py
           sleep 1h
-          python sticker.py
-          python 0/basics.py
-          python 1/basics.py
-          python 2/basics.py
-          python 3/basics.py
-          python 4/basics.py
-          python 5/basics.py
-          sleep 1h
-          python sticker.py
-          python 0/basics.py
-          python 1/basics.py
-          python 2/basics.py
-          python 3/basics.py
-          python 4/basics.py
-          python 5/basics.py
-          sleep 1h
-          python sticker.py
-          python 0/basics.py
-          python 1/basics.py
-          python 2/basics.py
-          python 3/basics.py
-          python 4/basics.py
-          python 5/basics.py
-          sleep 1h
-          python sticker.py
-          python 0/basics.py
-          python 1/basics.py
-          python 2/basics.py
-          python 3/basics.py
-          python 4/basics.py
-          python 5/basics.py
-          sleep 1h
-          python sticker.py
-          python 0/basics.py
-          python 1/basics.py
-          python 2/basics.py
-          python 3/basics.py
-          python 4/basics.py
-          python 5/basics.py
       - name: Loop
         continue-on-error: true
         run: |
