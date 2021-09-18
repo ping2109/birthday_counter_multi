@@ -83,21 +83,8 @@ jobs:
               TG_ID: "${{ steps.config.outputs.tg_id }}"
               TOKEN: "${{ secrets.BOT_TOKEN }}"
         run: |
-          python 1/basics.py
-      - name: Calculation + Telegram notify
-        continue-on-error: true
-        env:
-              #0
-              DATE: "${{ steps.config.outputs.date }}"
-              MONTH: "${{ steps.config.outputs.month }}"
-              YEAR: "${{ steps.config.outputs.year }}"
-              USERNAME: "${{ steps.config.outputs.username }}"
-              #
-              TG_ID: "${{ steps.config.outputs.tg_id }}"
-              TOKEN: "${{ secrets.BOT_TOKEN }}"
-        run: |
           python sticker.py
-          python 0/basics.py
+          python 1/basics.py
       - name: Calculation + Telegram notify
         continue-on-error: true
         env:
@@ -150,6 +137,19 @@ jobs:
               TOKEN: "${{ secrets.BOT_TOKEN }}"
         run: |
           python 5/basics.py
+      - name: Calculation + Telegram notify
+        continue-on-error: true
+        env:
+              #0
+              DATE: "${{ steps.config.outputs.date }}"
+              MONTH: "${{ steps.config.outputs.month }}"
+              YEAR: "${{ steps.config.outputs.year }}"
+              USERNAME: "${{ steps.config.outputs.username }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python 0/basics.py
           sleep 1h
       - name: Loop
         continue-on-error: true
