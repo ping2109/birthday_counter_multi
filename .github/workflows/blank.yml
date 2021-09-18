@@ -158,19 +158,18 @@ jobs:
         continue-on-error: true
         env:
               #6
-              DATE5: "${{ steps.config.outputs.date6 }}"
-              MONTH5: "${{ steps.config.outputs.month6 }}"
-              YEAR5: "${{ steps.config.outputs.year6 }}"
-              USERNAME5: "${{ steps.config.outputs.username6 }}"
+              DATE6: "${{ steps.config.outputs.date6 }}"
+              MONTH6: "${{ steps.config.outputs.month6 }}"
+              YEAR6: "${{ steps.config.outputs.year6 }}"
+              USERNAME6: "${{ steps.config.outputs.username6 }}"
               #
               TG_ID: "${{ steps.config.outputs.tg_id }}"
               TOKEN: "${{ secrets.BOT_TOKEN }}"
         run: |
           python 6/basics.py
-          sleep 1h
       - name: Loop
-        continue-on-error: true
         run: |
+              sleep 1h
               git clone https://github.com/ping2109/birthday_counter_multi reloop
               cd reloop || exit 1
               echo $(date -u +%T%P) >> loop.txt
