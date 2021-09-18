@@ -74,6 +74,19 @@ jobs:
       - name: Calculation + Telegram notify
         continue-on-error: true
         env:
+              #1
+              DATE1: "${{ steps.config.outputs.date1 }}"
+              MONTH1: "${{ steps.config.outputs.month1 }}"
+              YEAR1: "${{ steps.config.outputs.year1 }}"
+              USERNAME1: "${{ steps.config.outputs.username1 }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python 1/basics.py
+      - name: Calculation + Telegram notify
+        continue-on-error: true
+        env:
               #0
               DATE: "${{ steps.config.outputs.date }}"
               MONTH: "${{ steps.config.outputs.month }}"
@@ -85,19 +98,6 @@ jobs:
         run: |
           python sticker.py
           python 0/basics.py
-      - name: Calculation + Telegram notify
-        continue-on-error: true
-        env:
-              #1
-              DATE1: "${{ steps.config.outputs.date1 }}"
-              MONTH1: "${{ steps.config.outputs.month1 }}"
-              YEAR1: "${{ steps.config.outputs.year1 }}"
-              USERNAME1: "${{ steps.config.outputs.username1 }}"
-              #
-              TG_ID: "${{ steps.config.outputs.tg_id }}"
-              TOKEN: "${{ secrets.BOT_TOKEN }}"
-        run: |
-          python 1/basics.py
       - name: Calculation + Telegram notify
         continue-on-error: true
         env:
