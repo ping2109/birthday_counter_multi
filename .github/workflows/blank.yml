@@ -175,10 +175,10 @@ jobs:
         continue-on-error: true
         env:
               #7
-              DATE6: "${{ steps.config.outputs.date7 }}"
-              MONTH6: "${{ steps.config.outputs.month7 }}"
-              YEAR6: "${{ steps.config.outputs.year7 }}"
-              USERNAME6: "${{ steps.config.outputs.username7 }}"
+              DATE7: "${{ steps.config.outputs.date7 }}"
+              MONTH7: "${{ steps.config.outputs.month7 }}"
+              YEAR7: "${{ steps.config.outputs.year7 }}"
+              USERNAME7: "${{ steps.config.outputs.username7 }}"
               #
               TG_ID: "${{ steps.config.outputs.tg_id }}"
               TOKEN: "${{ secrets.BOT_TOKEN }}"
