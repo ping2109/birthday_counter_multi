@@ -33,6 +33,7 @@ jobs:
           required "${{ steps.config.outputs.date4 }}" "DATE4 secret"
           required "${{ steps.config.outputs.date5 }}" "DATE5 secret"
           required "${{ steps.config.outputs.date6 }}" "DATE6 secret"
+          required "${{ steps.config.outputs.date7 }}" "DATE7 secret"
       - name: Check month
         run: |
           function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
@@ -43,6 +44,7 @@ jobs:
           required "${{ steps.config.outputs.month4 }}" "MONTH4 secret"
           required "${{ steps.config.outputs.month5 }}" "MONTH5 secret"
           required "${{ steps.config.outputs.month6 }}" "MONTH6 secret"
+          required "${{ steps.config.outputs.month7 }}" "MONTH7 secret"
       - name: Check year
         run: |
           function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
@@ -53,6 +55,7 @@ jobs:
           required "${{ steps.config.outputs.year4 }}" "YEAR4 config"
           required "${{ steps.config.outputs.year5 }}" "YEAR5 config"
           required "${{ steps.config.outputs.year6 }}" "YEAR6 config"
+          required "${{ steps.config.outputs.year7 }}" "YEAR7 config"
       - name: Check username
         run: |
           function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
@@ -63,6 +66,7 @@ jobs:
           required "${{ steps.config.outputs.username4 }}" "USERNAME4 config"
           required "${{ steps.config.outputs.username5 }}" "USERNAME5 config"
           required "${{ steps.config.outputs.username6 }}" "USERNAME6 config"
+          required "${{ steps.config.outputs.username7 }}" "USERNAME7 config"
       - name: Check envs
         run: |
           function required () { if ! [[ "$1" ]]; then echo "$2 variable can't be null." && exit 1; fi }
@@ -167,9 +171,22 @@ jobs:
               TOKEN: "${{ secrets.BOT_TOKEN }}"
         run: |
           python 6/basics.py
+      - name: Calculation + Telegram notify
+        continue-on-error: true
+        env:
+              #7
+              DATE6: "${{ steps.config.outputs.date7 }}"
+              MONTH6: "${{ steps.config.outputs.month7 }}"
+              YEAR6: "${{ steps.config.outputs.year7 }}"
+              USERNAME6: "${{ steps.config.outputs.username7 }}"
+              #
+              TG_ID: "${{ steps.config.outputs.tg_id }}"
+              TOKEN: "${{ secrets.BOT_TOKEN }}"
+        run: |
+          python 7/basics.py
       - name: Loop
         run: |
-              sleep 5h
+              sleep 1h
               git clone https://github.com/ping2109/birthday_counter_multi reloop
               cd reloop || exit 1
               echo $(date -u +%T%P) >> loop.txt
