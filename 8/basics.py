@@ -8,12 +8,12 @@ from telegram.error import BadRequest
 bot_token = os.getenv('TOKEN')
 channel = os.getenv('TG_ID')
 
-username = os.getenv('USERNAME7')
+username = os.getenv('USERNAME8')
 
 def get_user_birthday():
-    year = int(os.getenv('YEAR7'))
-    month = int(os.getenv('MONTH7'))
-    day = int(os.getenv('DATE7')) + 1
+    year = int(os.getenv('YEAR8'))
+    month = int(os.getenv('MONTH8'))
+    day = int(os.getenv('DATE8')) + 1
     birthday = datetime.datetime(year, month, day)
     return birthday
 

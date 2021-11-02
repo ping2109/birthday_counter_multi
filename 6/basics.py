@@ -29,13 +29,14 @@ def main():
     now = datetime.datetime.now()
     days = compute_birthday_difference(bday, now)
     days2 = int(365)
-    if days < 0:
+    ogbday = bday.strftime("%x")
+    while days < 0:
         telegram_notify = telegram.Bot(bot_token)
         message = (f"""{username}'s birthday is in {format(-days)} days.""")
 
         telegram_notify.send_message(chat_id=channel, text=message, disable_web_page_preview=True,
                                 parse_mode='Markdown')
-    elif days > 0:
+    if days > 0:
         telegram_notify = telegram.Bot(bot_token)
         message = (f"""{username}'s birthday is in {days2 - days} days.""")
 
@@ -43,10 +44,10 @@ def main():
                                 parse_mode='Markdown')
     else:
         telegram_notify = telegram.Bot(bot_token)
-        message = (f"""Happy Birthday to {username}!""")
+        message = (f"""*Happy birthday to {username}!\nMake a wish 🥳\n\nHis/Her date of birth: {ogbday}*""")
 
         telegram_notify.send_message(chat_id=channel, text=message, disable_web_page_preview=True,
                                 parse_mode='Markdown')
-
         
+main()
 main()
