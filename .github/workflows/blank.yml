@@ -203,7 +203,7 @@ jobs:
           python 8/basics.py
       - name: Loop
         run: |
-              sleep 1h
+              sleep 5h
               git clone https://github.com/ping2109/birthday_counter_multi reloop
               cd reloop || exit 1
               echo $(date -u +%T%P) >> loop.txt
