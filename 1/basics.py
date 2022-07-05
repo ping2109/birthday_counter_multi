@@ -50,3 +50,4 @@ def main():
                                 parse_mode='Markdown')
         
 main()
+quit()

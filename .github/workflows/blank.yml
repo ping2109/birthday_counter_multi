@@ -95,7 +95,7 @@ jobs:
               TG_ID: "${{ steps.config.outputs.tg_id }}"
               TOKEN: "${{ secrets.BOT_TOKEN }}"
         run: |
-          #python sticker.py
+          python sticker.py
           python 0/basics.py
       - name: Calculation + Telegram notify
         continue-on-error: true
